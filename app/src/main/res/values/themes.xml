@@ -9,7 +9,12 @@
         <item name="android:background">@color/beige</item>
         <item name="android:textColor">@color/velvet</item>
         <item name="titleTextColor">@color/velvet</item>
+        <item name="actionOverflowButtonStyle">@style/AppTheme.ActionMenu.FlowButton</item>
+        <item name="actionMenuTextAppearance">@style/AppTheme.ActionMenu.Text</item>
+        <item name="android:textColorSecondary">@color/velvet</item>
         <item name="radioButtonStyle">@style/AppTheme.RadioButton</item>
+        <item name="seekBarStyle">@style/AppTheme.SeekBar</item>
+        <item name="switchStyle">@style/AppTheme.Switch</item>
     </style>
 
     <style name="AppTheme.Button" parent="Widget.AppCompat.Button.Colored">
@@ -21,7 +26,31 @@
     <style name="AppTheme.RadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:background">@drawable/button_radio</item>
         <item name="android:button">@color/clear</item>
-        <item name="android:textColor">#555555</item>
+        <item name="android:textColor">@color/velvet</item>
         <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="AppTheme.SeekBar" parent="Widget.AppCompat.SeekBar">
+        <item name="android:progressBackgroundTint">#88FFD700</item>
+        <item name="android:progressTint">@color/velvet</item>
+        <item name="android:thumbTint">@color/velvet</item>
+    </style>
+
+    <style name="AppTheme.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="android:textColor">@color/velvet</item>
+        <item name="materialThemeOverlay">@style/AppTheme.Switch.Overlay</item>
+    </style>
+
+    <style name="AppTheme.Switch.Overlay" parent="">
+        <item name="colorOnSurface">#DBCB57</item>
+        <item name="colorSecondary">#DBCB57</item>
+    </style>
+
+    <style name="AppTheme.ActionMenu.Text" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/velvet</item>
+    </style>
+
+    <style name="AppTheme.ActionMenu.FlowButton" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/velvet</item>
     </style>
 </resources>
