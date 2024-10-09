@@ -52,7 +52,7 @@ public class HubActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemID= item.getItemId();
-        if (itemID==R.id.action_user)
+        if (itemID==R.id.action_login)
             OpenLogin();
         if (itemID==R.id.action_settings)
             OpenSettings();
@@ -71,22 +71,19 @@ public class HubActivity extends AppCompatActivity {
     }
 
     private void OpenLogin() {
-        Intent i;
-        i=new Intent(this, LoginActivity.class);
+        Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
     }
 
     private void OpenSettings() {
-        Intent i;
-        i=new Intent(this, SettingsActivity.class);
+        Intent i = new Intent(this, SettingsActivity.class);
         startActivity(i);
     }
 
     private void Invited(View view) {
         CharSequence text = " invited";
-        int duration = Toast.LENGTH_SHORT;
-        Toast t;
-        t=Toast.makeText(this, text, duration);
+        int duration = Toast.LENGTH_LONG;
+        Toast t = Toast.makeText(this, text, duration);
         t.show();
     }
 

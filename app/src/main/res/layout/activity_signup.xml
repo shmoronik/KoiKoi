@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".SignupActivity"
     android:orientation="vertical"
-    android:background="@color/beige"
     android:gravity="center">
 
     <EditText

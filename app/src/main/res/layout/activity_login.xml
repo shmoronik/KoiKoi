@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
-    android:background="@color/beige"
     android:orientation="vertical"
     android:gravity="center">
 
@@ -49,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:text="@string/underlined_dynamic_text"
+        android:text="return"
         android:onClick="back"/>
 
 </LinearLayout>

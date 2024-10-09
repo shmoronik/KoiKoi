@@ -1,5 +1,6 @@
 package com.example.koikoi;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,10 +19,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
+    Dialog d;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        d = new Dialog(this);
+        d.setContentView(R.layout.dialog_signup);
     }
 
     @Override
@@ -33,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemID= item.getItemId();
-        if (itemID==R.id.action_user)
+        if (itemID==R.id.action_login)
             OpenLogin();
         if (itemID==R.id.action_settings)
             OpenSettings();
@@ -47,20 +51,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void OpenLogin() {
-        Intent i;
-        i=new Intent(this, LoginActivity.class);
-        startActivity(i);
+        d.show();
+        d.setCancelable(true);
     }
 
     private void OpenSettings() {
-        Intent i;
-        i=new Intent(this, SettingsActivity.class);
+        Intent i = new Intent(this, SettingsActivity.class);
         startActivity(i);
     }
 
     public void hub(View view) {
-        Intent i;
-        i = new Intent(this, HubActivity.class);
+        Intent i = new Intent(this, HubActivity.class);
         startActivity(i);
     }
 }

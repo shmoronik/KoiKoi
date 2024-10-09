@@ -14,17 +14,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button btnback;
-    EditText editText;
-    Globals g = (Globals) getApplication();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        btnback = (Button) findViewById(R.id.btnBack);
-        editText = (EditText) findViewById(R.id.editText);
-        btnback.setText(getString(R.string.underlined_dynamic_text, "return"));
     }
 
     public boolean isUser() {
@@ -35,9 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     public void login(View view) {
         Intent i;
         i = new Intent(this, HubActivity.class);
-        boolean isUser = isUser();
-        if (isUser) {
-            g.setUName(editText.getText().toString());
+        if (isUser()) {
             startActivity(i);
         }
     }

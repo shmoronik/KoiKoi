@@ -7,14 +7,19 @@
     </style>
 
     <style name="Default.Theme.KoiKoi" parent="Base.Theme.KoiKoi">
-        <item name="android:colorBackground">@color/beige</item>
         <item name="android:buttonStyle">@style/AppTheme.Button</item>
         <item name="android:background">@color/beige</item>
+        <item name="android:textColor">@color/velvet</item>
+        <item name="android:radioButtonStyle">@style/AppTheme.Radio</item>
     </style>
 
     <style name="AppTheme.Button" parent="Widget.AppCompat.Button.Colored">
         <item name="android:textStyle">italic</item>
         <item name="android:textColor">@color/gold</item>
         <item name="android:background">@drawable/button</item>
+    </style>
+
+    <style name="AppTheme.Radio" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:color">@color/velvet</item>
     </style>
 </resources>
