@@ -26,14 +26,14 @@ public class SignupActivity extends AppCompatActivity {
 
     public void signup(View view) {
         Intent i;
-        i = new Intent(this, LoginActivity.class);
+        i = new Intent(this, MainActivity.class);
         if (isUser())
             startActivity(i);
     }
 
-    public void login(View view) {
+    public void returnMain(View view) {
         Intent i;
-        i = new Intent(this, LoginActivity.class);
+        i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 

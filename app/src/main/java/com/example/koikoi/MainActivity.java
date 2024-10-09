@@ -4,18 +4,10 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-import java.util.ArrayList;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         d = new Dialog(this);
-        d.setContentView(R.layout.dialog_signup);
+        d.setContentView(R.layout.dialog_login);
     }
 
     @Override
@@ -39,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         int itemID= item.getItemId();
         if (itemID==R.id.action_login)
             OpenLogin();
+        if (itemID==R.id.action_user)
+            OpenUser();
         if (itemID==R.id.action_settings)
             OpenSettings();
         if (itemID==R.id.action_exit)
@@ -50,9 +44,19 @@ public class MainActivity extends AppCompatActivity {
         this.finishAffinity();
     }
 
+    public void login(View view) {
+        //editor.putString("Uname", ((EditText)d.findViewById(R.id.editUname)).getText().toString());
+        d.hide();
+    }
+
     private void OpenLogin() {
         d.show();
         d.setCancelable(true);
+    }
+
+    private void OpenUser() {
+        Intent i = new Intent(this, UserActivity.class);
+        startActivity(i);
     }
 
     private void OpenSettings() {
@@ -62,6 +66,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void hub(View view) {
         Intent i = new Intent(this, HubActivity.class);
+        startActivity(i);
+    }
+
+    public void signup(View view) {
+        Intent i;
+        i = new Intent(this, SignupActivity.class);
         startActivity(i);
     }
 }

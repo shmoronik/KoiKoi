@@ -64,19 +64,20 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal">
-            <androidx.appcompat.widget.AppCompatRadioButton
+            <RadioButton
                 android:id="@+id/radioScore1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Multi     " />
+                android:text="  Multi   "
+                android:layout_marginRight="10dp"/>
 
             <RadioButton
                 android:id="@+id/radioScore2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="7+" />
+                android:text="  7+  " />
 
         </RadioGroup>
     </LinearLayout>
@@ -84,7 +85,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/textYaku"
@@ -104,14 +106,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="traditional   " />
+                android:text="  traditional   "
+                android:layout_marginRight="10dp"/>
 
             <RadioButton
                 android:id="@+id/radioYaku2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="modern" />
+                android:text="  modern  " />
         </RadioGroup>
 
 
@@ -119,7 +122,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/textLight"
@@ -139,21 +143,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="off  " />
+                android:text="  off  "
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"/>
 
             <RadioButton
                 android:id="@+id/radioLight2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="wild  " />
+                android:text="  wild  "
+                android:layout_marginRight="10dp"/>
 
             <RadioButton
                 android:id="@+id/radioLight3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="wild susuki" />
+                android:text="  wild susuki  " />
         </RadioGroup>
     </LinearLayout>
 

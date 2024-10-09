@@ -2,41 +2,40 @@ package com.example.koikoi;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 import java.util.ArrayList;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 public class HubActivity extends AppCompatActivity {
-    Dialog d;
-    Globals g = (Globals)getApplication();
+    Dialog b; Dialog d;
+    //SharedPreferences sharedPreferences = getSharedPreferences("GenPrefs", MODE_PRIVATE);
+    //SharedPreferences.Editor editor = sharedPreferences.edit();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hub);
-        // friends list dialog
+        // login page dialog
         d = new Dialog(this);
-        d.setContentView(R.layout.dialog_friends);
+        d.setContentView(R.layout.dialog_login);
+        // friends list dialog
+        b = new Dialog(this);
+        b.setContentView(R.layout.dialog_friends);
         // friends list recycler
         ArrayList<Friend> friends = new ArrayList<>();
         for(int i=1; i<15; i++){
             friends.add(new Friend("Friend "+i, (int)(Math.random()*100), (int)(Math.random()*100)));
         }
-        RecyclerView recyclerView = d.findViewById(R.id.recyclerViewFriends);
+        RecyclerView recyclerView = b.findViewById(R.id.recyclerViewFriends);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,1);
         recyclerView.setLayoutManager(layoutManager);
         FriendsAdapter friendsAdapter = new FriendsAdapter(friends);
@@ -46,6 +45,14 @@ public class HubActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        /*if (sharedPreferences.getString("Uname", "").isEmpty()) {
+            menu.findItem(R.id.action_login).setVisible(true);
+            menu.findItem(R.id.action_user).setVisible(false);
+        }
+        else {
+            menu.findItem(R.id.action_login).setVisible(false);
+            menu.findItem(R.id.action_user).setVisible(true);
+        }*/
         return true;
     }
 
@@ -54,6 +61,8 @@ public class HubActivity extends AppCompatActivity {
         int itemID= item.getItemId();
         if (itemID==R.id.action_login)
             OpenLogin();
+        if (itemID==R.id.action_user)
+            OpenUser();
         if (itemID==R.id.action_settings)
             OpenSettings();
         if (itemID==R.id.action_exit)
@@ -61,9 +70,14 @@ public class HubActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void login(View view) {
+        //editor.putString("Uname", ((EditText)d.findViewById(R.id.editUname)).getText().toString());
+        d.hide();
+    }
+
     public void Flist(View view) {
-        d.show();
-        d.setCancelable(true);
+        b.show();
+        b.setCancelable(true);
     }
 
     private void OpenExit() {
@@ -71,12 +85,17 @@ public class HubActivity extends AppCompatActivity {
     }
 
     private void OpenLogin() {
-        Intent i = new Intent(this, LoginActivity.class);
-        startActivity(i);
+        d.show();
+        d.setCancelable(true);
     }
 
     private void OpenSettings() {
         Intent i = new Intent(this, SettingsActivity.class);
+        startActivity(i);
+    }
+
+    private void OpenUser() {
+        Intent i = new Intent(this, UserActivity.class);
         startActivity(i);
     }
 
@@ -86,5 +105,4 @@ public class HubActivity extends AppCompatActivity {
         Toast t = Toast.makeText(this, text, duration);
         t.show();
     }
-
 }

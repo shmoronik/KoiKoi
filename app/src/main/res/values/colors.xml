@@ -5,4 +5,6 @@
     <color name="beige">#fff0db</color>
     <color name="velvet">#902C3E</color>
     <color name="gold">#FFD700</color>
+    <color name="link">#ff008577</color>
+    <color name="clear">#00FFFFFF</color>
 </resources>
