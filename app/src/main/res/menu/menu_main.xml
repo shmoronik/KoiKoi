@@ -21,7 +21,8 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/action_exit"
-        android:orderInCategory="100"
-        android:title="Close"
-        app:showAsAction="always"/>
+        android:title=""
+        android:icon="@android:drawable/ic_menu_close_clear_cancel"
+        android:iconTint="@color/velvet"
+        app:showAsAction="always" />
 </menu>

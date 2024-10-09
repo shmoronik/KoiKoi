@@ -164,13 +164,13 @@
         </RadioGroup>
     </LinearLayout>
 
-    <Switch
+    <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switchChaff"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:text="      2x chaff cards    " />
 
-    <Switch
+    <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switchCont"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
