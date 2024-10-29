@@ -6,18 +6,27 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    Dialog d;
+    Dialog d; Toast toast; InputValidation inputVal;
+    EditText uNameInput; EditText passInput;
+    String uName; String pass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         d = new Dialog(this);
         d.setContentView(R.layout.dialog_login);
+        // input validator setup
+        inputVal = new InputValidation();
+        // user input fields setup
+        uNameInput = (EditText) d.findViewById(R.id.editUname);
+        passInput = (EditText) d.findViewById(R.id.editPass);
     }
 
     @Override
@@ -45,8 +54,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login(View view) {
-        //editor.putString("Uname", ((EditText)d.findViewById(R.id.editUname)).getText().toString());
-        d.hide();
+        // user input values setup
+        uName = uNameInput.getText().toString();
+        pass = passInput.getText().toString();
+        // user input value checks
+        if (!inputVal.isVUser(uName, pass)) {
+            toast = Toast.makeText(this, "username or password are incorrect", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        else
+            d.hide();
     }
 
     private void OpenLogin() {

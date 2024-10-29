@@ -17,7 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 public class HubActivity extends AppCompatActivity {
-    Dialog b; Dialog d;
+    Dialog b; Dialog d; Toast toast; InputValidation inputVal;
+    EditText uNameInput; EditText passInput;
+    String uName; String pass;
     //SharedPreferences sharedPreferences = getSharedPreferences("GenPrefs", MODE_PRIVATE);
     //SharedPreferences.Editor editor = sharedPreferences.edit();
     @Override
@@ -27,6 +29,11 @@ public class HubActivity extends AppCompatActivity {
         // login page dialog
         d = new Dialog(this);
         d.setContentView(R.layout.dialog_login);
+        // input validator setup
+        inputVal = new InputValidation();
+        // user input fields setup
+        uNameInput = (EditText) d.findViewById(R.id.editUname);
+        passInput = (EditText) d.findViewById(R.id.editPass);
         // friends list dialog
         b = new Dialog(this);
         b.setContentView(R.layout.dialog_friends);
@@ -71,8 +78,16 @@ public class HubActivity extends AppCompatActivity {
     }
 
     public void login(View view) {
-        //editor.putString("Uname", ((EditText)d.findViewById(R.id.editUname)).getText().toString());
-        d.hide();
+        // user input values setup
+        uName = uNameInput.getText().toString();
+        pass = passInput.getText().toString();
+        // user input value checks
+        if (!inputVal.isVUser(uName, pass)) {
+            toast = Toast.makeText(this, "username or password are incorrect", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        else
+            d.hide();
     }
 
     public void Flist(View view) {
@@ -100,9 +115,8 @@ public class HubActivity extends AppCompatActivity {
     }
 
     private void Invited(View view) {
-        CharSequence text = " invited";
-        int duration = Toast.LENGTH_LONG;
-        Toast t = Toast.makeText(this, text, duration);
-        t.show();
+        // WIP add username of invite target
+        toast = Toast.makeText(this, "friend invited", Toast.LENGTH_LONG);
+        toast.show();
     }
 }
