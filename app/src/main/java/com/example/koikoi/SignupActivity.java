@@ -1,5 +1,6 @@
 package com.example.koikoi;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,10 +9,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -25,10 +32,10 @@ public class SignupActivity extends AppCompatActivity {
         // input validator setup
         inputVal = new InputValidation();
         // user input fields setup
-        uNameInput = (EditText) findViewById(R.id.editTextUName);
-        passInput = (EditText) findViewById(R.id.editTextPass);
-        cPassInput = (EditText) findViewById(R.id.editTextCPass);
-        emailInput = (EditText) findViewById(R.id.editTextEmail);
+        uNameInput = findViewById(R.id.editTextUName);
+        passInput = findViewById(R.id.editTextPass);
+        cPassInput = findViewById(R.id.editTextCPass);
+        emailInput = findViewById(R.id.editTextEmail);
     }
 
     public boolean isUser() {
@@ -62,9 +69,20 @@ public class SignupActivity extends AppCompatActivity {
     public void signup(View view) {
         Intent i;
         i = new Intent(this, MainActivity.class);
-        if (isUser())
-            // WIP add user too database
-            startActivity(i);
+        if (isUser()) {
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(), "user created successfully", Toast.LENGTH_SHORT).show();
+                        startActivity(i);
+                    }
+                    else
+                        Toast.makeText(getApplicationContext(), "Error, " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+        }
     }
 
     public void returnMain(View view) {

@@ -1,22 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GameActivity"
-    android:orientation="vertical">
+    tools:context=".GameActivity">
+
+    <ImageView
+        android:id="@+id/iV_card"
+        android:layout_width="55dp"
+        android:layout_height="94dp"
+        android:layout_margin="1dp"
+        android:layout_weight="1"
+        android:background="@drawable/card_front"
+        android:scaleType="centerCrop"
+        android:src="@drawable/_10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/cHand"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="96dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:weightSum="8"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/iV_card1"
+            android:layout_width="55dp"
+            android:layout_height="94dp"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:background="@drawable/card_front"
+            android:src="@drawable/_10" />
+
+        <ImageView
+            android:id="@+id/iV_card2"
+            android:layout_width="55dp"
+            android:layout_height="94dp"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card_front" />
+
+        <ImageView
+            android:id="@+id/iV_card3"
+            android:layout_width="55dp"
+            android:layout_height="94dp"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card_front" />
+
+        <ImageView
+            android:id="@+id/iV_card4"
+            android:layout_width="55dp"
+            android:layout_height="94dp"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card_front" />
+
+        <ImageView
+            android:id="@+id/iV_card5"
+            android:layout_width="55dp"
+            android:layout_height="94dp"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card_front" />
+
+        <ImageView
+            android:id="@+id/iV_card6"
+            android:layout_width="55dp"
+            android:layout_height="94dp"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card_front" />
+
+        <ImageView
+            android:id="@+id/iV_card7"
+            android:layout_width="55dp"
+            android:layout_height="94dp"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card_front" />
+
+        <ImageView
+            android:id="@+id/iV_card8"
+            android:layout_width="55dp"
+            android:layout_height="94dp"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card_front" />
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
 
-    </LinearLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

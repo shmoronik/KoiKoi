@@ -1,5 +1,8 @@
 package com.example.koikoi;
 
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
+
 public class Card {
     public enum Season {
         January, February, March, April, May, June, July, August, September, October, November, December
@@ -8,20 +11,17 @@ public class Card {
         Bright, Animal, Ribbon, Chaff
     }
 
+    private int img;
     private Season season;
     private Type type;
-    private int sub;
 
-    public Card(Season suit, Type type, int sub) {
+    public Card(int img, Season suit, Type type) {
+        this.img = img;
         this.season = suit;
         this.type = type;
-        this.sub = sub;
     }
 
-    public Card(Season season, Type type) {
-        this.season = season;
-        this.type = type;
-    }
+    public int getImg() { return img; }
 
     public Season getSeason() {
         return season;
@@ -31,7 +31,4 @@ public class Card {
         return type;
     }
 
-    public int getSub() {
-        return sub;
-    }
 }
