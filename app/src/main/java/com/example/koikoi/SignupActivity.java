@@ -9,22 +9,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class SignupActivity extends AppCompatActivity {
 
     EditText uNameInput; EditText passInput; EditText cPassInput; EditText emailInput;
     String uName; String pass; String cPass; String email;
     InputValidation inputVal; Toast toast;
+    FirebaseConnector fCon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,57 +33,27 @@ public class SignupActivity extends AppCompatActivity {
         emailInput = findViewById(R.id.editTextEmail);
     }
 
-    public boolean isUser() {
+    public void signup(View view) {
         // user input values setup
         uName = uNameInput.getText().toString();
         pass = passInput.getText().toString();
         cPass = cPassInput.getText().toString();
         email = emailInput.getText().toString();
         // user input value checks
-        if (!inputVal.isVuName(uName)) {
-            toast = Toast.makeText(this, "username is too short", Toast.LENGTH_LONG);
-            toast.show();
-        }
-        else if(!inputVal.isVPass(pass)) {
-            toast = Toast.makeText(this, "password is too short", Toast.LENGTH_LONG);
-            toast.show();
-        }
-        else if(!pass.equals(cPass)) {
-            toast = Toast.makeText(this, "reinputted password is different from password", Toast.LENGTH_LONG);
-            toast.show();
-        }
-        else if(!inputVal.isVEmail(email)) {
-            toast = Toast.makeText(this, "invalid email inputted", Toast.LENGTH_LONG);
-            toast.show();
-        }
+        if(!inputVal.isVEmail(email))
+            emailInput.setError("invalid email inputted");
+        else if(!inputVal.isVuName(uName))
+            uNameInput.setError("username is too short");
+        else if(!inputVal.isVPass(pass))
+            passInput.setError("password is too short");
+        else if(!pass.equals(cPass))
+            cPassInput.setError("reinputted password is different from password");
         else
-            return true;
-        return false;
-    }
-
-    public void signup(View view) {
-        Intent i;
-        i = new Intent(this, MainActivity.class);
-        if (isUser()) {
-            FirebaseAuth mAuth = FirebaseAuth.getInstance();
-            mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "user created successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(i);
-                    }
-                    else
-                        Toast.makeText(getApplicationContext(), "Error, " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
-        }
+            fCon.register(email, pass, getApplicationContext());
     }
 
     public void returnMain(View view) {
-        Intent i;
-        i = new Intent(this, MainActivity.class);
-        startActivity(i);
+        startActivity(new Intent(this, MainActivity.class));
     }
 
 }

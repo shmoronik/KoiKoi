@@ -95,6 +95,10 @@ public class HubActivity extends AppCompatActivity {
         b.setCancelable(true);
     }
 
+    public void OpenGame(View view) {
+        startActivity(new Intent(this, GameActivity.class));
+    }
+
     private void OpenExit() {
         this.finishAffinity();
     }
@@ -105,13 +109,15 @@ public class HubActivity extends AppCompatActivity {
     }
 
     private void OpenSettings() {
-        Intent i = new Intent(this, SettingsActivity.class);
-        startActivity(i);
+        startActivity(new Intent(this, SettingsActivity.class));
     }
 
     private void OpenUser() {
-        Intent i = new Intent(this, UserActivity.class);
-        startActivity(i);
+        startActivity(new Intent(this, UserActivity.class));
+    }
+
+    public void signup(View view) {
+        startActivity(new Intent(this, SignupActivity.class));
     }
 
     private void Invited(View view) {

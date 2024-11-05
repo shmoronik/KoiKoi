@@ -9,23 +9,47 @@ import java.util.ArrayList;
 
 public class GameActivity extends AppCompatActivity {
 
-    ImageView iv_card1, iv_card2, iv_card3, iv_card4, iv_card5, iv_card6, iv_card7, iv_card8;
-    ArrayList<Integer> cards;
+    Deck deck, pHand, eHand, table;
+    ArrayList<ImageView> pHCards, eHCards, dCards;
 
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-        iv_card1 = findViewById(R.id.iV_card1);
-        iv_card2 = findViewById(R.id.iV_card2);
-        iv_card3 = findViewById(R.id.iV_card3);
-        iv_card4 = findViewById(R.id.iV_card4);
-        iv_card5 = findViewById(R.id.iV_card5);
-        iv_card6 = findViewById(R.id.iV_card6);
-        iv_card7 = findViewById(R.id.iV_card7);
-        iv_card8 = findViewById(R.id.iV_card8);
-
-
+        // cards image view setup
+        pHCards = new ArrayList<ImageView>();
+        pHCards.add(findViewById(R.id.iV_pHCard1));
+        pHCards.add(findViewById(R.id.iV_pHCard2));
+        pHCards.add(findViewById(R.id.iV_pHCard3));
+        pHCards.add(findViewById(R.id.iV_pHCard4));
+        pHCards.add(findViewById(R.id.iV_pHCard5));
+        pHCards.add(findViewById(R.id.iV_pHCard6));
+        pHCards.add(findViewById(R.id.iV_pHCard7));
+        pHCards.add(findViewById(R.id.iV_pHCard8));
+        eHCards = new ArrayList<ImageView>();
+        eHCards.add(findViewById(R.id.iV_eHCard1));
+        eHCards.add(findViewById(R.id.iV_eHCard2));
+        eHCards.add(findViewById(R.id.iV_eHCard3));
+        eHCards.add(findViewById(R.id.iV_eHCard4));
+        eHCards.add(findViewById(R.id.iV_eHCard5));
+        eHCards.add(findViewById(R.id.iV_eHCard6));
+        eHCards.add(findViewById(R.id.iV_eHCard7));
+        eHCards.add(findViewById(R.id.iV_eHCard8));
+        // cards setup
+        deck = new Deck();
+        pHand = new Deck(deck);
+        eHand = new Deck(deck);
+        table = new Deck(deck);
+        // hand images setup
+        for(int j=0; j<3; j++) {
+            for (int i = 0; i < 8; i++) {
+                switch(j) {
+                    case 0:
+                        pHCards.get(i).setImageDrawable(getDrawable(pHand.getImg(i)));
+                    case 1:
+                        eHCards.get(i).setImageDrawable(getDrawable(eHand.getImg(i)));
+                }
+            }
+        }
     }
 }
