@@ -1,7 +1,12 @@
 package com.example.koikoi;
 
+import android.app.ActionBar;
 import android.os.Bundle;
+import android.text.Layout;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +14,8 @@ import java.util.ArrayList;
 
 public class GameActivity extends AppCompatActivity {
 
+    LinearLayout ph;
+    float i;
     Deck deck, pHand, eHand, table;
     ArrayList<ImageView> pHCards, eHCards, dCards;
 
@@ -16,6 +23,7 @@ public class GameActivity extends AppCompatActivity {
     protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        i=8f;
         // cards image view setup
         pHCards = new ArrayList<ImageView>();
         pHCards.add(findViewById(R.id.iV_pHCard1));
@@ -41,9 +49,9 @@ public class GameActivity extends AppCompatActivity {
         eHand = new Deck(deck);
         table = new Deck(deck);
         // hand images setup
-        for(int j=0; j<3; j++) {
+        for (int j = 0; j < 3; j++) {
             for (int i = 0; i < 8; i++) {
-                switch(j) {
+                switch (j) {
                     case 0:
                         pHCards.get(i).setImageDrawable(getDrawable(pHand.getImg(i)));
                     case 1:
@@ -52,4 +60,11 @@ public class GameActivity extends AppCompatActivity {
             }
         }
     }
+
+    public void pCard(View view) {
+        ph = (LinearLayout) findViewById(R.id.pHand);
+        view.setVisibility(View.GONE);
+        ph.setWeightSum(--i);
+    }
+
 }

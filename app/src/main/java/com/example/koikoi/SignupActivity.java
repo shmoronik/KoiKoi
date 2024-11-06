@@ -34,6 +34,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void signup(View view) {
+        fCon = new FirebaseConnector();
         // user input values setup
         uName = uNameInput.getText().toString();
         pass = passInput.getText().toString();
