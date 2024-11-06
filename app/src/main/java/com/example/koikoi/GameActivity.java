@@ -17,7 +17,8 @@ public class GameActivity extends AppCompatActivity {
     LinearLayout ph;
     float i;
     Deck deck, pHand, eHand, table;
-    ArrayList<ImageView> pHCards, eHCards, dCards;
+    ImageView[] pHCards, eHCards;
+    ImageView[][] tCards;
 
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
@@ -25,24 +26,37 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         i=8f;
         // cards image view setup
-        pHCards = new ArrayList<ImageView>();
-        pHCards.add(findViewById(R.id.iV_pHCard1));
-        pHCards.add(findViewById(R.id.iV_pHCard2));
-        pHCards.add(findViewById(R.id.iV_pHCard3));
-        pHCards.add(findViewById(R.id.iV_pHCard4));
-        pHCards.add(findViewById(R.id.iV_pHCard5));
-        pHCards.add(findViewById(R.id.iV_pHCard6));
-        pHCards.add(findViewById(R.id.iV_pHCard7));
-        pHCards.add(findViewById(R.id.iV_pHCard8));
-        eHCards = new ArrayList<ImageView>();
-        eHCards.add(findViewById(R.id.iV_eHCard1));
-        eHCards.add(findViewById(R.id.iV_eHCard2));
-        eHCards.add(findViewById(R.id.iV_eHCard3));
-        eHCards.add(findViewById(R.id.iV_eHCard4));
-        eHCards.add(findViewById(R.id.iV_eHCard5));
-        eHCards.add(findViewById(R.id.iV_eHCard6));
-        eHCards.add(findViewById(R.id.iV_eHCard7));
-        eHCards.add(findViewById(R.id.iV_eHCard8));
+        pHCards = new ImageView[8];
+        pHCards[0] = (findViewById(R.id.iV_pHCard1));
+        pHCards[1] = (findViewById(R.id.iV_pHCard2));
+        pHCards[2] = (findViewById(R.id.iV_pHCard3));
+        pHCards[3] = (findViewById(R.id.iV_pHCard4));
+        pHCards[4] = (findViewById(R.id.iV_pHCard5));
+        pHCards[5] = (findViewById(R.id.iV_pHCard6));
+        pHCards[6] = (findViewById(R.id.iV_pHCard7));
+        pHCards[7] = (findViewById(R.id.iV_pHCard8));
+        eHCards = new ImageView[8];
+        eHCards[0] = (findViewById(R.id.iV_eHCard1));
+        eHCards[1] = (findViewById(R.id.iV_eHCard2));
+        eHCards[2] = (findViewById(R.id.iV_eHCard3));
+        eHCards[3] = (findViewById(R.id.iV_eHCard4));
+        eHCards[4] = (findViewById(R.id.iV_eHCard5));
+        eHCards[5] = (findViewById(R.id.iV_eHCard6));
+        eHCards[6] = (findViewById(R.id.iV_eHCard7));
+        eHCards[7] = (findViewById(R.id.iV_eHCard8));
+        tCards = new ImageView[2][6];
+        tCards[0][0] = (findViewById(R.id.iV_table1_1));
+        tCards[0][1] = (findViewById(R.id.iV_table1_2));
+        tCards[0][2] = (findViewById(R.id.iV_table1_3));
+        tCards[0][3] = (findViewById(R.id.iV_table1_4));
+        tCards[0][4] = (findViewById(R.id.iV_table1_5));
+        tCards[0][5] = (findViewById(R.id.iV_table1_6));
+        tCards[1][0] = (findViewById(R.id.iV_table2_1));
+        tCards[1][1] = (findViewById(R.id.iV_table2_2));
+        tCards[1][2] = (findViewById(R.id.iV_table2_3));
+        tCards[1][3] = (findViewById(R.id.iV_table2_4));
+        tCards[1][4] = (findViewById(R.id.iV_table2_5));
+        tCards[1][5] = (findViewById(R.id.iV_table2_6));
         // cards setup
         deck = new Deck();
         pHand = new Deck(deck);
@@ -53,9 +67,14 @@ public class GameActivity extends AppCompatActivity {
             for (int i = 0; i < 8; i++) {
                 switch (j) {
                     case 0:
-                        pHCards.get(i).setImageDrawable(getDrawable(pHand.getImg(i)));
+                        pHCards[i].setImageDrawable(getDrawable(pHand.getImg(i)));
                     case 1:
-                        eHCards.get(i).setImageDrawable(getDrawable(eHand.getImg(i)));
+                        eHCards[i].setImageDrawable(getDrawable(eHand.getImg(i)));
+                    case 2:
+                        if(i<4)
+                            tCards[0][i].setImageDrawable(getDrawable(table.getImg(i)));
+                        else
+                            tCards[1][i-4].setImageDrawable(getDrawable(table.getImg(i)));
                 }
             }
         }
