@@ -29,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
         emailInput = d.findViewById(R.id.editEmail);
         passInput = d.findViewById(R.id.editPass);
         fCon = new FirebaseConnector();
+
+        User user = new User("test@testmail.com", "testuser");
+        user.setuId(fCon.getMAuth().getCurrentUser().getUid());
+        fCon.getReference("users").child(user.getuId()).setValue(user);
     }
 
     @Override

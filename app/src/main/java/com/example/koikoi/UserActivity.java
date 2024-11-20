@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,14 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class UserActivity extends AppCompatActivity {
-
+    FirebaseConnector fCon;
     //SharedPreferences sharedPreferences = getSharedPreferences("GenPrefs", MODE_PRIVATE);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        fCon = new FirebaseConnector();
         /* pull data from shared pref
         sharedPreferences.getString("Uname", "");*/
+        //TextView umailView = findViewById(R.id.umailView);
+        //umailView.setText(fCon.getMAuth().getCurrentUser().getEmail());
         // friends list recycler
         ArrayList<Friend> friends = new ArrayList<>();
         for(int i=1; i<15; i++){
@@ -36,5 +40,10 @@ public class UserActivity extends AppCompatActivity {
         Intent i;
         i = new Intent(this, MainActivity.class);
         startActivity(i);
+    }
+
+    public void logout(View view) {
+        fCon.logout();
+        startActivity(new Intent(this, MainActivity.class));
     }
 }
