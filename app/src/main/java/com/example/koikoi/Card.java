@@ -31,4 +31,5 @@ public class Card {
         return type;
     }
 
+    public boolean isPair(Card card) {return card.getSeason()==season;}
 }

@@ -1,22 +1,20 @@
 package com.example.koikoi;
 
-import android.app.ActionBar;
 import android.os.Bundle;
-import android.text.Layout;
+import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-
 public class GameActivity extends AppCompatActivity {
 
     LinearLayout ph;
-    float i;
+    float WeightSum;
+    int marginSize, pMarginSize;
     Deck deck, pHand, eHand, table;
+    View sCard;
     ImageView[] pHCards, eHCards;
     ImageView[][] tCards;
 
@@ -24,7 +22,7 @@ public class GameActivity extends AppCompatActivity {
     protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        i=8f;
+        WeightSum =8f; marginSize = pxConverter(2); pMarginSize = pxConverter(1);
         // cards image view setup
         pHCards = new ImageView[8];
         pHCards[0] = (findViewById(R.id.iV_pHCard1));
@@ -62,6 +60,7 @@ public class GameActivity extends AppCompatActivity {
         pHand = new Deck(deck);
         eHand = new Deck(deck);
         table = new Deck(deck);
+        sCard = pHCards[0];
         // hand images setup
         for (int j = 0; j < 3; j++) {
             for (int i = 0; i < 8; i++) {
@@ -80,10 +79,23 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    public void selectCard(View view) {
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
+        params.setMargins(marginSize,marginSize,marginSize,marginSize);
+        sCard.setLayoutParams(params);
+        params.setMargins(pMarginSize,pMarginSize,pMarginSize,pMarginSize);
+        view.setLayoutParams(params);
+        sCard = view;
+    }
+
     public void pCard(View view) {
         ph = (LinearLayout) findViewById(R.id.pHand);
         view.setVisibility(View.GONE);
-        ph.setWeightSum(--i);
+        ph.setWeightSum(--WeightSum);
+
     }
 
+    public int pxConverter(int DP) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DP, getResources().getDisplayMetrics());
+    }
 }

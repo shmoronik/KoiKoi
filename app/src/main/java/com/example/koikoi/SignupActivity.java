@@ -1,24 +1,17 @@
 package com.example.koikoi;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class SignupActivity extends AppCompatActivity {
 
     EditText uNameInput; EditText passInput; EditText cPassInput; EditText emailInput;
-    String uName; String pass; String cPass; String email;
-    InputValidation inputVal; Toast toast;
+    String uName; String pass; String cPass; String email; User user;
+    InputValidation inputVal;
     FirebaseConnector fCon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +41,11 @@ public class SignupActivity extends AppCompatActivity {
         else if(!inputVal.isVPass(pass))
             passInput.setError("password is too short");
         else if(!pass.equals(cPass))
-            cPassInput.setError("reinputted password is different from password");
-        else
-            fCon.register(email, pass, getApplicationContext());
+            cPassInput.setError("reInputted password is different from password");
+        else {
+            user = new User(email, uName);
+            fCon.register(email, pass, user, getApplicationContext());
+        }
     }
 
     public void returnMain(View view) {

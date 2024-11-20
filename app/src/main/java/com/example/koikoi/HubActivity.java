@@ -17,9 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 public class HubActivity extends AppCompatActivity {
-    Dialog b; Dialog d; Toast toast; InputValidation inputVal;
-    EditText uNameInput; EditText passInput;
-    String uName; String pass;
+    Dialog b; Dialog d; Toast toast; InputValidation inputVal; FirebaseConnector fCon;
+    EditText emailInput; EditText passInput;
+    String email; String pass;
     //SharedPreferences sharedPreferences = getSharedPreferences("GenPrefs", MODE_PRIVATE);
     //SharedPreferences.Editor editor = sharedPreferences.edit();
     @Override
@@ -32,8 +32,8 @@ public class HubActivity extends AppCompatActivity {
         // input validator setup
         inputVal = new InputValidation();
         // user input fields setup
-        uNameInput = (EditText) d.findViewById(R.id.editUname);
-        passInput = (EditText) d.findViewById(R.id.editPass);
+        emailInput = d.findViewById(R.id.editEmail);
+        passInput = d.findViewById(R.id.editPass);
         // friends list dialog
         b = new Dialog(this);
         b.setContentView(R.layout.dialog_friends);
@@ -52,16 +52,15 @@ public class HubActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        /*if (sharedPreferences.getString("Uname", "").isEmpty()) {
-            menu.findItem(R.id.action_login).setVisible(true);
-            menu.findItem(R.id.action_user).setVisible(false);
-        }
-        else {
-            menu.findItem(R.id.action_login).setVisible(false);
-            menu.findItem(R.id.action_user).setVisible(true);
-        }*/
         return true;
     }
+
+    /*@Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_login).setVisible(fCon.isUser());
+        menu.findItem(R.id.action_user).setVisible(!fCon.isUser());
+        return true;
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -77,18 +76,17 @@ public class HubActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void login(View view) {
+    /*public void login(View view) {
         // user input values setup
-        uName = uNameInput.getText().toString();
+        email = emailInput.getText().toString();
         pass = passInput.getText().toString();
         // user input value checks
-        if (!inputVal.isVUser(uName, pass)) {
-            toast = Toast.makeText(this, "username or password are incorrect", Toast.LENGTH_LONG);
-            toast.show();
+        if (!inputVal.isVUser(email, pass)) {
+            fCon.login(email, pass, this);
         }
         else
             d.hide();
-    }
+    }*/
 
     public void Flist(View view) {
         b.show();
@@ -120,7 +118,7 @@ public class HubActivity extends AppCompatActivity {
         startActivity(new Intent(this, SignupActivity.class));
     }
 
-    private void Invited(View view) {
+    public void Invited(View view) {
         // WIP add username of invite target
         toast = Toast.makeText(this, "friend invited", Toast.LENGTH_LONG);
         toast.show();

@@ -143,7 +143,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btnEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -154,26 +154,27 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:backgroundTint="@color/clear"
         android:text="log out"
         android:textColor="@color/link"
-        app:layout_constraintStart_toEndOf="@+id/button5"
-        app:layout_constraintTop_toTopOf="@+id/button5" />
+        android:onClick="logout"
+        app:layout_constraintStart_toEndOf="@+id/btnEdit"
+        app:layout_constraintTop_toTopOf="@+id/btnEdit" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/btnDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:backgroundTint="@color/clear"
         android:text="delete account"
         android:textColor="@android:color/holo_red_dark"
-        app:layout_constraintStart_toEndOf="@+id/button6"
-        app:layout_constraintTop_toTopOf="@+id/button6" />
+        app:layout_constraintStart_toEndOf="@+id/btnLogout"
+        app:layout_constraintTop_toTopOf="@+id/btnLogout" />
 
     <View
         android:id="@+id/divider3"
@@ -186,7 +187,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
+        app:layout_constraintTop_toBottomOf="@+id/btnEdit" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button8"
