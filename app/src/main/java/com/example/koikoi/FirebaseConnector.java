@@ -58,20 +58,14 @@ public class FirebaseConnector {
         getMAuth().signOut();
     }
 
-    public void saveRBase(User user, Context context) {
-        // thank you random student from a few years ago
-        user.setuId(getMAuth().getCurrentUser().getUid());
-        getReference("users").child(user.getuId()).setValue(user);
-        Toast.makeText(context, "user created successfully", Toast.LENGTH_SHORT).show();
-        context.startActivity(new Intent(context, MainActivity.class));
-    }
-
     public void register(String email, String pass, User user, Context context) {
         getMAuth().createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    saveRBase(user, context);
+                    user.setuId(getMAuth().getCurrentUser().getUid());
+                    getReference("users").child(user.getuId()).setValue(user);
+                    Toast.makeText(context, "user created successfully", Toast.LENGTH_SHORT).show();
                 }
                 else
                     Toast.makeText(context, "Error, " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
