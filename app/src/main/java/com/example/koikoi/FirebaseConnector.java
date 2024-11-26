@@ -10,8 +10,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class FirebaseConnector {
     private static FirebaseAuth mAuth;
@@ -36,26 +40,46 @@ public class FirebaseConnector {
         return dRef;
     }
 
+    /*public void UserData() {
+        getReference("users").child(getMAuth().getCurrentUser().getUid()).addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        cUser = snapshot.getValue(User.class);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                }
+        );
+    }*/
+
     public void login(String email, String pass, Context context) {
         getMAuth().signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(context, "Signed in", Toast.LENGTH_SHORT).show();
-                    context.startActivity(new Intent(context, context.getClass()));
+                    Toast.makeText(context, "logged in", Toast.LENGTH_SHORT).show();
                 }
                 else
-                    Toast.makeText(context, "username or password are incorrect", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "email or password are incorrect", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public void delete() {
+
     }
 
     public boolean isUser() {
         return getMAuth().getCurrentUser() != null;
     }
 
-    public void logout() {
+    public void logout(Context context) {
         getMAuth().signOut();
+        Toast.makeText(context, "logout successful", Toast.LENGTH_LONG).show();
     }
 
     public void register(String email, String pass, User user, Context context) {

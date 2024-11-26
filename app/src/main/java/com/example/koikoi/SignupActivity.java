@@ -45,7 +45,6 @@ public class SignupActivity extends AppCompatActivity {
         else {
             user = new User(email, uName);
             fCon.register(email, pass, user, getApplicationContext());
-            startActivity(new Intent(this, MainActivity.class));
         }
     }
 

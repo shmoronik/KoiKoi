@@ -14,14 +14,17 @@ import java.util.ArrayList;
 
 public class UserActivity extends AppCompatActivity {
     FirebaseConnector fCon;
+    TextView unameView;
     //SharedPreferences sharedPreferences = getSharedPreferences("GenPrefs", MODE_PRIVATE);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
         fCon = new FirebaseConnector();
-        /* pull data from shared pref
-        sharedPreferences.getString("Uname", "");*/
+        if(fCon.isUser()) {
+            unameView = findViewById(R.id.unameView);
+            unameView.setText("user connected {temp message}");
+        }
         //TextView umailView = findViewById(R.id.umailView);
         //umailView.setText(fCon.getMAuth().getCurrentUser().getEmail());
         // friends list recycler
@@ -43,7 +46,7 @@ public class UserActivity extends AppCompatActivity {
     }
 
     public void logout(View view) {
-        fCon.logout();
+        fCon.logout(this);
         startActivity(new Intent(this, MainActivity.class));
     }
 }

@@ -1,5 +1,8 @@
 package com.example.koikoi;
 
+// login + checks
+// logout
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,8 +32,14 @@ public class MainActivity extends AppCompatActivity {
         emailInput = d.findViewById(R.id.editEmail);
         passInput = d.findViewById(R.id.editPass);
         fCon = new FirebaseConnector();
-
     }
+
+    /*@Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_login).setVisible(fCon.isUser());
+        menu.findItem(R.id.action_user).setVisible(!fCon.isUser());
+        return true;
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -38,12 +47,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    /*@Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        //menu.findItem(R.id.action_login).setVisible(fCon.isUser());
-        menu.findItem(R.id.action_user).setVisible(!fCon.isUser());
-        return true;
-    }*/
+
 
 
     @Override
@@ -64,17 +68,17 @@ public class MainActivity extends AppCompatActivity {
         this.finishAffinity();
     }
 
-    /*public void login(View view) {
+    public void login(View view) {
         // user input values setup
         email = emailInput.getText().toString();
         pass = passInput.getText().toString();
         // user input value checks
-        if (!inputVal.isVUser(email, pass)) {
-            fCon.login(email, pass, this);
-        }
-        else
-            d.hide();
-    }*/
+        if(!inputVal.isVEmail(email))
+            emailInput.setError("invalid email inputted");
+        else if(!inputVal.isVuName(pass))
+            passInput.setError("password is too short");
+        fCon.login(email, pass, this);
+    }
 
     private void OpenLogin() {
         d.show();

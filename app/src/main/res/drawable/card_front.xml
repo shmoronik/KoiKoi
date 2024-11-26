@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/white"/>
-    <size android:height="902dp" android:width="512dp"/>
-    <stroke android:color="@color/velvet" android:width="2dp"/>
-    <padding android:left="2dp" android:top="2dp" android:right="2dp" android:bottom="2dp" />
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <solid android:color="@color/white"/>
+            <size android:height="930dp" android:width="540dp"/>
+            <stroke android:color="@color/velvet" android:width="30dp"/>
+            <padding android:left="30dp" android:top="30dp" android:right="30dp" android:bottom="30dp" />
+        </shape>
+    </item>
+    <item android:id="@+id/CardImage" android:drawable="@drawable/ic_launcher_foreground"/>
+</layer-list>

@@ -16,13 +16,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintDimensionRatio="385:188">
+        app:layout_constraintDimensionRatio="372:188">
 
         <ImageView
             android:id="@+id/iV_deck"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:scaleType="centerInside"
             android:src="@drawable/card_back"
             android:layout_margin="2dp"
             android:layout_weight="6"/>
@@ -45,14 +46,14 @@
                     android:layout_height="match_parent"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
-                    android:background="@drawable/card_front"
+                    android:src="@drawable/card_front"
                     android:scaleType="centerInside" />
 
                 <ImageView
                     android:id="@+id/iV_table1_2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/card_front"
+                    android:src="@drawable/card_front"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
                     android:scaleType="centerInside"/>
@@ -60,7 +61,7 @@
                     android:id="@+id/iV_table1_3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/card_front"
+                    android:src="@drawable/card_front"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
                     android:scaleType="centerInside"/>
@@ -68,7 +69,7 @@
                     android:id="@+id/iV_table1_4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/card_front"
+                    android:src="@drawable/card_front"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
                     android:scaleType="centerInside"/>
@@ -76,7 +77,7 @@
                     android:id="@+id/iV_table1_5"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/card_front"
+                    android:src="@drawable/card_front"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
                     android:scaleType="centerInside"
@@ -85,7 +86,7 @@
                     android:id="@+id/iV_table1_6"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/card_front"
+                    android:src="@drawable/card_front"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
                     android:scaleType="centerInside"
@@ -100,7 +101,7 @@
                     android:id="@+id/iV_table2_1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/card_front"
+                    android:src="@drawable/card_front"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
                     android:scaleType="centerInside"/>
@@ -108,7 +109,7 @@
                     android:id="@+id/iV_table2_2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/card_front"
+                    android:src="@drawable/card_front"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
                     android:scaleType="centerInside"/>
@@ -116,7 +117,7 @@
                     android:id="@+id/iV_table2_3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/card_front"
+                    android:src="@drawable/card_front"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
                     android:scaleType="centerInside"/>
@@ -124,7 +125,7 @@
                     android:id="@+id/iV_table2_4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/card_front"
+                    android:src="@drawable/card_front"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
                     android:scaleType="centerInside"/>
@@ -132,7 +133,7 @@
                     android:id="@+id/iV_table2_5"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/card_front"
+                    android:src="@drawable/card_front"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
                     android:scaleType="centerInside"
@@ -141,7 +142,7 @@
                     android:id="@+id/iV_table2_6"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/card_front"
+                    android:src="@drawable/card_front"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
                     android:scaleType="centerInside"
@@ -161,7 +162,7 @@
         android:orientation="horizontal"
         android:weightSum="8"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="28:6">
+        app:layout_constraintDimensionRatio="144:31">
 
         <ImageView
             android:id="@+id/iV_pHCard1"
@@ -170,7 +171,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:background="@drawable/card_front"
+            android:src="@drawable/card_front"
             android:onClick="pCard"/>
 
         <ImageView
@@ -180,7 +181,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:background="@drawable/card_front"
+            android:src="@drawable/card_front"
             android:onClick="pCard"/>
 
         <ImageView
@@ -190,7 +191,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:background="@drawable/card_front"
+            android:src="@drawable/card_front"
             android:onClick="pCard"/>
 
         <ImageView
@@ -200,7 +201,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:background="@drawable/card_front"
+            android:src="@drawable/card_front"
             android:onClick="pCard"/>
 
         <ImageView
@@ -210,7 +211,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:background="@drawable/card_front"
+            android:src="@drawable/card_front"
             android:onClick="pCard"/>
 
         <ImageView
@@ -220,7 +221,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:background="@drawable/card_front"
+            android:src="@drawable/card_front"
             android:onClick="pCard"/>
 
         <ImageView
@@ -230,7 +231,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:background="@drawable/card_front"
+            android:src="@drawable/card_front"
             android:onClick="pCard"/>
 
         <ImageView
@@ -240,7 +241,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:background="@drawable/card_front"
+            android:src="@drawable/card_front"
             android:onClick="pCard"/>
 
     </LinearLayout>
@@ -253,7 +254,7 @@
         android:orientation="horizontal"
         android:weightSum="8"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintDimensionRatio="28:6">
+        app:layout_constraintDimensionRatio="144:31">
 
         <ImageView
             android:id="@+id/iV_eHCard1"
@@ -262,8 +263,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:src="@drawable/_80"
-            android:background="@drawable/card_front"/>
+            android:src="@drawable/card_front"/>
 
         <ImageView
             android:id="@+id/iV_eHCard2"
@@ -272,7 +272,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:background="@drawable/card_front" />
+            android:src="@drawable/card_front" />
 
         <ImageView
             android:id="@+id/iV_eHCard3"
@@ -281,7 +281,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:background="@drawable/card_front" />
+            android:src="@drawable/card_front" />
 
         <ImageView
             android:id="@+id/iV_eHCard4"
@@ -290,7 +290,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:background="@drawable/card_front" />
+            android:src="@drawable/card_front" />
 
         <ImageView
             android:id="@+id/iV_eHCard5"
@@ -299,7 +299,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:background="@drawable/card_front" />
+            android:src="@drawable/card_front" />
 
         <ImageView
             android:id="@+id/iV_eHCard6"
@@ -308,7 +308,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:background="@drawable/card_front" />
+            android:src="@drawable/card_front" />
 
         <ImageView
             android:id="@+id/iV_eHCard7"
@@ -317,7 +317,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:background="@drawable/card_front" />
+            android:src="@drawable/card_front" />
 
         <ImageView
             android:id="@+id/iV_eHCard8"
@@ -326,7 +326,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:background="@drawable/card_front" />
+            android:src="@drawable/card_front" />
 
     </LinearLayout>
 

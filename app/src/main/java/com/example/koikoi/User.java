@@ -1,9 +1,11 @@
 package com.example.koikoi;
 
+import java.util.ArrayList;
+
 public class User {
-    private String email;
-    private String uName;
-    private String uId;
+    private String email, uName, uId;
+    private  int Gplayed, Gwins, Glost;
+    private ArrayList<String> Friends;
 
     public String getuName() {
         return uName;

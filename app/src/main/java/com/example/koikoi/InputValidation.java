@@ -15,10 +15,4 @@ public class InputValidation {
     public boolean isVEmail(String email) {
         return email != null && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
-
-    // user existence check
-    public boolean isVUser(String uName, String pass) {
-        // WIP check with database
-        return uName != null && pass != null;
-    }
 }
