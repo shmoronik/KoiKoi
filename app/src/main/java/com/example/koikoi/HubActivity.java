@@ -101,6 +101,19 @@ public class HubActivity extends AppCompatActivity {
         this.finishAffinity();
     }
 
+    public void login(View view) {
+        // user input values setup
+        email = emailInput.getText().toString();
+        pass = passInput.getText().toString();
+        // user input value checks
+        if(!inputVal.isVEmail(email))
+            emailInput.setError("invalid email inputted");
+        else if(!inputVal.isVuName(pass))
+            passInput.setError("password is too short");
+        else
+            fCon.login(email, pass, this);
+    }
+
     private void OpenLogin() {
         d.show();
         d.setCancelable(true);

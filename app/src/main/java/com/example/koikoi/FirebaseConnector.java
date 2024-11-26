@@ -69,9 +69,7 @@ public class FirebaseConnector {
         });
     }
 
-    public void delete() {
-
-    }
+    public void delete() {}
 
     public boolean isUser() {
         return getMAuth().getCurrentUser() != null;

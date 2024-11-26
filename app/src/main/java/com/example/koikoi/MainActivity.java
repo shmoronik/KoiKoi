@@ -77,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
             emailInput.setError("invalid email inputted");
         else if(!inputVal.isVuName(pass))
             passInput.setError("password is too short");
-        fCon.login(email, pass, this);
+        else
+            fCon.login(email, pass, this);
     }
 
     private void OpenLogin() {
