@@ -1,11 +1,15 @@
 package com.example.koikoi;
 
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 
 public class User {
     private String email, uName, uId;
     private  int Gplayed, Gwins, Glost;
-    private ArrayList<String> Friends;
+    private ArrayList<Friend> Friends;
+
+    public User() {}
 
     public String getuName() {
         return uName;
@@ -34,5 +38,36 @@ public class User {
     public User(String email, String uName) {
         this.email = email;
         this.uName = uName;
+        this.Gplayed = 0;
+        this.Gwins = 0;
+        this.Glost = 0;
+    }
+
+    public int getGplayed() {
+        return Gplayed;
+    }
+
+    public int getGwins() {
+        return Gwins;
+    }
+
+    public int getGlost() {
+        return Glost;
+    }
+
+    public void GplayedInc(Boolean isWin) {
+        this.Gplayed += 1;
+        if (isWin)
+            this.Gwins += 1;
+        else
+            this.Glost += 1;
+    }
+
+    public ArrayList<Friend> getFriends() {
+        ArrayList<Friend> friends = new ArrayList<>();
+        for(int i=1; i<15; i++){
+            friends.add(new Friend("Friend "+i, (int)(Math.random()*100), (int)(Math.random()*100)));
+        }
+        return friends;
     }
 }

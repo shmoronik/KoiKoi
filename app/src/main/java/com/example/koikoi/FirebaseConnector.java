@@ -94,4 +94,17 @@ public class FirebaseConnector {
             }
         });
     }
+
+    public void readUData(IFirebase fCallback) {
+        getReference("users").child(getMAuth().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                fCallback.uDataCallback(user);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
 }

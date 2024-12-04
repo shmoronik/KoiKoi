@@ -12,31 +12,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class UserActivity extends AppCompatActivity {
+public class UserActivity extends AppCompatActivity implements IFirebase {
     FirebaseConnector fCon;
-    TextView unameView;
+    TextView unameView, umailView, gamesView, winsView, lossView;
     //SharedPreferences sharedPreferences = getSharedPreferences("GenPrefs", MODE_PRIVATE);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
         fCon = new FirebaseConnector();
-        if(fCon.isUser()) {
-            unameView = findViewById(R.id.unameView);
-            unameView.setText("user connected {temp message}");
-        }
-        //TextView umailView = findViewById(R.id.umailView);
-        //umailView.setText(fCon.getMAuth().getCurrentUser().getEmail());
-        // friends list recycler
-        ArrayList<Friend> friends = new ArrayList<>();
-        for(int i=1; i<15; i++){
-            friends.add(new Friend("Friend "+i, (int)(Math.random()*100), (int)(Math.random()*100)));
-        }
-        RecyclerView recyclerView = this.findViewById(R.id.RecyclerViewFriends);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1);
-        recyclerView.setLayoutManager(layoutManager);
-        FriendsAdapter friendsAdapter = new FriendsAdapter(friends);
-        recyclerView.setAdapter(friendsAdapter);
+        fCon.readUData(this);
+        // text views initialization
+        unameView = findViewById(R.id.unameView);
+        umailView = findViewById(R.id.umailView);
+        gamesView = findViewById(R.id.gamesView);
+        winsView = findViewById(R.id.winsView);
+        lossView = findViewById(R.id.lossView);
     }
 
     public void returnMain(View view) {
@@ -48,5 +39,20 @@ public class UserActivity extends AppCompatActivity {
     public void logout(View view) {
         fCon.logout(this);
         startActivity(new Intent(this, MainActivity.class));
+    }
+
+    @Override
+    public void uDataCallback(User user) {
+        unameView.setText(user.getuName());
+        umailView.setText(user.getEmail());
+        gamesView.setText(String.valueOf(user.getGplayed()));
+        winsView.setText(String.valueOf(user.getGwins()));
+        lossView.setText(String.valueOf(user.getGlost()));
+
+        RecyclerView recyclerView = this.findViewById(R.id.RecyclerViewFriends);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1);
+        recyclerView.setLayoutManager(layoutManager);
+        FriendsAdapter friendsAdapter = new FriendsAdapter(user.getFriends());
+        recyclerView.setAdapter(friendsAdapter);
     }
 }

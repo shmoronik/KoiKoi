@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle" android:opticalInsetBottom="@dimen/cardview_compat_inset_shadow">
+            <size android:height="1020dp" android:width="594dp"/>
+            <gradient
+                android:centerX="50%"
+                android:centerY="50%"
+                android:startColor="@color/gold"
+                android:gradientRadius="100%"
+                android:endColor="@color/clear"
+                android:type="radial"/>
+        </shape>
+    </item>
+</selector>

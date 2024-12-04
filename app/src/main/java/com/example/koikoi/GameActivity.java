@@ -1,7 +1,11 @@
 package com.example.koikoi;
 
 import android.content.Context;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -15,12 +19,10 @@ import androidx.core.content.ContextCompat;
 
 public class GameActivity extends AppCompatActivity {
 
-    LayerDrawable editCard; VectorSwitch vs;
+    VectorSwitch vs;
     LinearLayout ph;
     float WeightSum;
-    int marginSize, pMarginSize;
-    Deck deck, pHand, eHand, table;
-    View sCard;
+    GameState game;
     ImageView[] pHCards, eHCards;
     ImageView[][] tCards;
 
@@ -28,7 +30,7 @@ public class GameActivity extends AppCompatActivity {
     protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        WeightSum = 8f; marginSize = pxConverter(2); pMarginSize = pxConverter(1);
+        WeightSum = 8f;
         // cards image view setup
         pHCards = new ImageView[8];
         pHCards[0] = (findViewById(R.id.iV_pHCard1));
@@ -61,49 +63,29 @@ public class GameActivity extends AppCompatActivity {
         tCards[1][3] = (findViewById(R.id.iV_table2_4));
         tCards[1][4] = (findViewById(R.id.iV_table2_5));
         tCards[1][5] = (findViewById(R.id.iV_table2_6));
-        // cards setup
-        deck = new Deck();
-        pHand = new Deck(deck);
-        eHand = new Deck(deck);
-        table = new Deck(deck);
-        sCard = pHCards[0];
-        // hand images setup
         vs = new VectorSwitch();
+        game = new GameState();
+        game.RoundSetup();
         for (int j = 0; j < 3; j++) {
             for (int i = 0; i < 8; i++) {
                 switch (j) {
                     case 0:
-                        vs.customVector(pHCards[i], pHand.getImg(i));
+                        vs.customVector(pHCards[i], game.getpHand().getImg(i));
                     case 1:
-                        vs.customVector(eHCards[i], eHand.getImg(i));
+                        vs.customVector(eHCards[i], game.geteHand().getImg(i));
                     case 2:
                         if(i<4)
-                            vs.customVector(tCards[0][i], table.getImg(i));
+                            vs.customVector(tCards[0][i], game.getTable().getImg(i));
                         else
-                            vs.customVector(tCards[1][i-4], table.getImg(i));
+                            vs.customVector(tCards[1][i-4], game.getTable().getImg(i));
                 }
             }
         }
     }
 
-    /*public void selectCard(View view) {
-        if (sCard!=null && sCard!=view) {
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
-            params.setMargins(marginSize, marginSize, marginSize, marginSize);
-            sCard.setLayoutParams(params);
-        }
-        params.setMargins(pMarginSize,pMarginSize,pMarginSize,pMarginSize);
-        view.setLayoutParams(params);
-        sCard = view;
-    }*/
-
     public void pCard(View view) {
         ph = (LinearLayout) findViewById(R.id.pHand);
         view.setVisibility(View.GONE);
         ph.setWeightSum(--WeightSum);
-    }
-
-    public int pxConverter(int DP) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DP, getResources().getDisplayMetrics());
     }
 }

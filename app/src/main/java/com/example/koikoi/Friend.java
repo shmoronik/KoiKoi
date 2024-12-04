@@ -16,18 +16,10 @@ public class Friend {
         return Uid;
     }
 
-    public void setUid(String uid) {
-        Uid = uid;
-    }
-
     public String getUname() { return Uname; }
 
     public int getWin() {
         return Win;
-    }
-
-    public void setWin(int win) {
-        Win = win;
     }
 
     public void addWin() {
@@ -36,10 +28,6 @@ public class Friend {
 
     public int getLoss() {
         return Loss;
-    }
-
-    public void setLoss(int loss) {
-        Loss = loss;
     }
 
     public void addLoss() {
