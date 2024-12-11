@@ -1,7 +1,6 @@
 package com.example.koikoi;
 
 import android.content.Context;
-import android.content.Intent;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,18 +13,17 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class FirebaseConnector {
-    private static FirebaseAuth mAuth;
+    private static FirebaseAuth dAuth;
     private static FirebaseDatabase dBase;
     private static DatabaseReference dRef;
 
-    public static FirebaseAuth getMAuth(){
-        if (mAuth == null)
-            mAuth = FirebaseAuth.getInstance();
-        return mAuth;
+    public static FirebaseAuth getdAuth(){
+        if (dAuth == null)
+            dAuth = FirebaseAuth.getInstance();
+        return dAuth;
     }
 
     public static FirebaseDatabase getdBase() {
@@ -40,24 +38,9 @@ public class FirebaseConnector {
         return dRef;
     }
 
-    /*public void UserData() {
-        getReference("users").child(getMAuth().getCurrentUser().getUid()).addValueEventListener(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        cUser = snapshot.getValue(User.class);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                }
-        );
-    }*/
-
+    // user functions
     public void login(String email, String pass, Context context) {
-        getMAuth().signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        getdAuth().signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -68,24 +51,20 @@ public class FirebaseConnector {
             }
         });
     }
-
     public void delete() {}
-
     public boolean isUser() {
-        return getMAuth().getCurrentUser() != null;
+        return getdAuth().getCurrentUser() != null;
     }
-
     public void logout(Context context) {
-        getMAuth().signOut();
+        getdAuth().signOut();
         Toast.makeText(context, "logout successful", Toast.LENGTH_LONG).show();
     }
-
     public void register(String email, String pass, User user, Context context) {
-        getMAuth().createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        getdAuth().createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    user.setuId(getMAuth().getCurrentUser().getUid());
+                    user.setuId(getdAuth().getCurrentUser().getUid());
                     getReference("users").child(user.getuId()).setValue(user);
                     Toast.makeText(context, "user created successfully", Toast.LENGTH_SHORT).show();
                 }
@@ -94,9 +73,8 @@ public class FirebaseConnector {
             }
         });
     }
-
     public void readUData(IFirebase fCallback) {
-        getReference("users").child(getMAuth().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+        getReference("users").child(getdAuth().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
@@ -106,5 +84,10 @@ public class FirebaseConnector {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+    }
+
+    // game lobby functions
+    public void createLobby(GameState GS, Context context) {
+        getReference("games").setValue(GS);
     }
 }
