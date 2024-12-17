@@ -18,18 +18,11 @@
         android:onClick="OpenGame"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnFriend"
+        android:id="@+id/btnLobbyList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20px"
         android:onClick="Flist"
-        android:text="play with friend" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnOnline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20px"
         android:text="Lobbies" />
 
     <androidx.appcompat.widget.AppCompatButton

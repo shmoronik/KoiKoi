@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class LobbyAdapter extends RecyclerView.Adapter<LobbyAdapter.LobbiesViewHolder> {
     private ArrayList<GameState> lobbies;
 
-    public LobbyAdapter(ArrayList<Friend> friends) {
+    public LobbyAdapter(ArrayList<GameState> lobbies) {
         this.lobbies = lobbies;
     }
 
@@ -31,7 +31,7 @@ public class LobbyAdapter extends RecyclerView.Adapter<LobbyAdapter.LobbiesViewH
         GameState currentGame = lobbies.get(position);
         holder.lobbyNameView.setText(currentGame.getlName());
         holder.lobbyDetailsView.setText(currentGame.getPlayerNames());
-        if (currentGame.isFull())
+        if (!currentGame.isFull())
             holder.button.setText("Join");
         else
             holder.button.setText("spectate");

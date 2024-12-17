@@ -12,8 +12,9 @@ public class GameState {
 
     public GameState(){}
 
-    public GameState(User player) {
+    public GameState(User player, String name) {
         player1 = player;
+        lName = name;
         player1_points = 0;
         player2_points = 0;
         round = Card.Season.January;
@@ -44,11 +45,15 @@ public class GameState {
 
     public String getPlayerNames() {
         if (player2==null)
-            return String.format("$1 / empty", player1);
-        return String.format("$1 / $2", player1, player2);
+            return String.format("%s / empty", player1.getuName());
+        return String.format("%s / %s2", player1.getuName(), player2.getuName());
     }
 
     public boolean isFull() {
         return player2 != null;
+    }
+
+    public boolean isPub() {
+        return lPass == null || lPass == "";
     }
 }

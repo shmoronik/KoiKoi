@@ -20,8 +20,6 @@ public class HubActivity extends AppCompatActivity {
     Dialog b; Dialog d; Toast toast; InputValidation inputVal; FirebaseConnector fCon;
     EditText emailInput; EditText passInput;
     String email; String pass;
-    //SharedPreferences sharedPreferences = getSharedPreferences("GenPrefs", MODE_PRIVATE);
-    //SharedPreferences.Editor editor = sharedPreferences.edit();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,19 +32,20 @@ public class HubActivity extends AppCompatActivity {
         // user input fields setup
         emailInput = d.findViewById(R.id.editEmail);
         passInput = d.findViewById(R.id.editPass);
-        // friends list dialog
+        // lobby dialog
         b = new Dialog(this);
-        b.setContentView(R.layout.dialog_friends);
-        // friends list recycler
-        ArrayList<Friend> friends = new ArrayList<>();
-        for(int i=1; i<15; i++){
-            friends.add(new Friend("Friend "+i, (int)(Math.random()*100), (int)(Math.random()*100)));
-        }
-        RecyclerView recyclerView = b.findViewById(R.id.recyclerViewFriends);
+        b.setContentView(R.layout.dialog_lobbies);
+        // lobby recycler - next 4 lines are temp
+        ArrayList<GameState> lobbies = new ArrayList<>();
+        User dummy = new User("dummymail@co", "dummy user");
+        for(int i=1; i<15; i++)
+            lobbies.add(new GameState(dummy , "lobby "+i ));
+
+        RecyclerView recyclerView = b.findViewById(R.id.recyclerViewLobbies);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,1);
         recyclerView.setLayoutManager(layoutManager);
-        FriendsAdapter friendsAdapter = new FriendsAdapter(friends);
-        recyclerView.setAdapter(friendsAdapter);
+        LobbyAdapter lobbyAdapter = new LobbyAdapter(lobbies);
+        recyclerView.setAdapter(lobbyAdapter);
     }
 
     @Override
