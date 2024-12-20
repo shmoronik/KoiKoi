@@ -23,6 +23,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="create a lobby"
+        android:onClick="createLobby"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/recyclerViewLobbies"
         app:layout_constraintStart_toStartOf="parent"

@@ -43,11 +43,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        if(fCon.isUser())
+            getMenuInflater().inflate(R.menu.menu_user, menu);
+        else
+            getMenuInflater().inflate(R.menu.menu_guest, menu);
         return true;
     }
-
-
 
 
     @Override

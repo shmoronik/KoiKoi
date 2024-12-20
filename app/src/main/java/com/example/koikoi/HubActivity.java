@@ -2,13 +2,12 @@ package com.example.koikoi;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
+
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,13 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 public class HubActivity extends AppCompatActivity {
-    Dialog b; Dialog d; Toast toast; InputValidation inputVal; FirebaseConnector fCon;
+    Dialog b; Dialog d; Dialog l; InputValidation inputVal; FirebaseConnector fCon;
     EditText emailInput; EditText passInput;
     String email; String pass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hub);
+        fCon = new FirebaseConnector();
         // login page dialog
         d = new Dialog(this);
         d.setContentView(R.layout.dialog_login);
@@ -35,6 +35,8 @@ public class HubActivity extends AppCompatActivity {
         // lobby dialog
         b = new Dialog(this);
         b.setContentView(R.layout.dialog_lobbies);
+        l = new Dialog(this);
+        l.setContentView(R.layout.dialog_lobbysetup);
         // lobby recycler - next 4 lines are temp
         ArrayList<GameState> lobbies = new ArrayList<>();
         User dummy = new User("dummymail@co", "dummy user");
@@ -50,7 +52,10 @@ public class HubActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        if(fCon.isUser())
+            getMenuInflater().inflate(R.menu.menu_user, menu);
+        else
+            getMenuInflater().inflate(R.menu.menu_guest, menu);
         return true;
     }
 
@@ -130,9 +135,9 @@ public class HubActivity extends AppCompatActivity {
         startActivity(new Intent(this, SignupActivity.class));
     }
 
-    public void Invited(View view) {
-        // WIP add username of invite target
-        toast = Toast.makeText(this, "friend invited", Toast.LENGTH_LONG);
-        toast.show();
+    public void createLobby(View view) {
+        b.hide();
+        l.show();
+        l.setCancelable(true);
     }
 }
