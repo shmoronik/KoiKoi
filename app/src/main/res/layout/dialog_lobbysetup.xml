@@ -33,5 +33,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:text="create" />
+        android:text="create"
+        android:onClick="lobbyUpload"/>
 </LinearLayout>

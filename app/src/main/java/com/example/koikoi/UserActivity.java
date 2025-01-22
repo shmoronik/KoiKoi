@@ -55,4 +55,8 @@ public class UserActivity extends AppCompatActivity implements IFirebase {
         FriendsAdapter friendsAdapter = new FriendsAdapter(user.getFriends());
         recyclerView.setAdapter(friendsAdapter);
     }
+
+    @Override
+    public void lobbyDataCallback(ArrayList<GameState> lobbies) {
+    }
 }

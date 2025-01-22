@@ -44,7 +44,7 @@ public class SignupActivity extends AppCompatActivity {
             cPassInput.setError("reInputted password is different from password");
         else {
             user = new User(email, uName);
-            fCon.register(email, pass, user, getApplicationContext());
+            fCon.register(pass, user, getApplicationContext());
         }
     }
 

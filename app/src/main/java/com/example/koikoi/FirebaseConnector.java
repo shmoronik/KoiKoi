@@ -4,16 +4,21 @@ import android.content.Context;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FirebaseConnector {
     private static FirebaseAuth dAuth;
@@ -59,8 +64,8 @@ public class FirebaseConnector {
         getdAuth().signOut();
         Toast.makeText(context, "logout successful", Toast.LENGTH_LONG).show();
     }
-    public void register(String email, String pass, User user, Context context) {
-        getdAuth().createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+    public void register(String pass, User user, Context context) {
+        getdAuth().createUserWithEmailAndPassword(user.getEmail(), pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -88,6 +93,47 @@ public class FirebaseConnector {
 
     // game lobby functions
     public void createLobby(GameState GS, Context context) {
-        getReference("games").setValue(GS);
+        getReference("games").child(GS.getlID()).setValue(GS);
+        Toast.makeText(context, "lobby created", Toast.LENGTH_SHORT).show();
     }
+
+    public void readGameState(IGame fCallback, String key) {
+        getReference("games").child(key).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                GameState GS = snapshot.getValue(GameState.class);
+                fCallback.GDataCallback(GS);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    public void roundStart(GameState GS) {
+        getReference("games").child(GS.getlID()).child("deck").setValue(GS.getDeck());
+        getReference("games").child(GS.getlID()).child("pHand").setValue(GS.getpHand());
+        getReference("games").child(GS.getlID()).child("eHand").setValue(GS.geteHand());
+        getReference("games").child(GS.getlID()).child("table").setValue(GS.getTable());
+        getReference("games").child(GS.getlID()).child("round").setValue(GS.getRound());
+    }
+
+    public void readLobbies(IFirebase fCallback) {
+        getReference("games").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<GameState> lobbies = new ArrayList<GameState>();
+                for(DataSnapshot lobbySnapshot : snapshot.getChildren()) {
+                    lobbies.add(lobbySnapshot.getValue(GameState.class));
+                }
+                fCallback.lobbyDataCallback(lobbies);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 }

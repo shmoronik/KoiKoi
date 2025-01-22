@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements IGame {
 
     VectorSwitch vs;
     LinearLayout ph;
@@ -25,12 +25,14 @@ public class GameActivity extends AppCompatActivity {
     GameState game;
     ImageView[] pHCards, eHCards;
     ImageView[][] tCards;
+    FirebaseConnector fCon; String key;
 
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         WeightSum = 8f;
+        fCon = new FirebaseConnector();
         // cards image view setup
         pHCards = new ImageView[8];
         pHCards[0] = (findViewById(R.id.iV_pHCard1));
@@ -63,29 +65,33 @@ public class GameActivity extends AppCompatActivity {
         tCards[1][3] = (findViewById(R.id.iV_table2_4));
         tCards[1][4] = (findViewById(R.id.iV_table2_5));
         tCards[1][5] = (findViewById(R.id.iV_table2_6));
-        vs = new VectorSwitch();
-        game = new GameState();
-        game.RoundSetup();
-        for (int j = 0; j < 3; j++) {
-            for (int i = 0; i < 8; i++) {
-                switch (j) {
-                    case 0:
-                        vs.customVector(pHCards[i], game.getpHand().getImg(i));
-                    case 1:
-                        vs.customVector(eHCards[i], game.geteHand().getImg(i));
-                    case 2:
-                        if(i<4)
-                            vs.customVector(tCards[0][i], game.getTable().getImg(i));
-                        else
-                            vs.customVector(tCards[1][i-4], game.getTable().getImg(i));
-                }
-            }
-        }
+        key = getIntent().getStringExtra("key");
+        fCon.readGameState(this, key);
     }
 
     public void pCard(View view) {
         ph = (LinearLayout) findViewById(R.id.pHand);
         view.setVisibility(View.GONE);
         ph.setWeightSum(--WeightSum);
+    }
+
+    @Override
+    public void GDataCallback(GameState GS) {
+        vs = new VectorSwitch();
+        for (int j = 0; j < 3; j++) {
+            for (int i = 0; i < 8; i++) {
+                switch (j) {
+                    case 0:
+                        vs.customVector(pHCards[i], GS.getpHand().getImg(i));
+                    case 1:
+                        vs.customVector(eHCards[i], GS.geteHand().getImg(i));
+                    case 2:
+                        if(i<4)
+                            vs.customVector(tCards[0][i], GS.getTable().getImg(i));
+                        else
+                            vs.customVector(tCards[1][i-4], GS.getTable().getImg(i));
+                }
+            }
+        }
     }
 }

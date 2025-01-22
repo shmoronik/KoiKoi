@@ -1,15 +1,11 @@
 package com.example.koikoi;
 
-import android.graphics.drawable.LayerDrawable;
-
-import androidx.annotation.DrawableRes;
-import androidx.core.content.ContextCompat;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-public class Deck {
-    private ArrayList<Card> cards;
+
+public class Deck implements Serializable {
+    public ArrayList<Card> cards;
 
     public Deck() {
         cards = new ArrayList<>();
@@ -29,6 +25,10 @@ public class Deck {
 
     public int getImg(int i) {
         return cards.get(i).getImg();
+    }
+
+    public int size() {
+        return cards.size();
     }
 
     private void InitializeDeck() {
@@ -95,8 +95,8 @@ public class Deck {
         //Nov
         season = Card.Season.November;
         cards.add(new Card(R.drawable._110, season, Card.Type.Bright));
-        cards.add(new Card(R.drawable._111, season, Card.Type.Ribbon));
-        cards.add(new Card(R.drawable._112, season, Card.Type.Animal));
+        cards.add(new Card(R.drawable._111, season, Card.Type.Animal));
+        cards.add(new Card(R.drawable._112, season, Card.Type.Ribbon));
         cards.add(new Card(R.drawable._113, season, Card.Type.Chaff));
         //Dec
         season = Card.Season.December;

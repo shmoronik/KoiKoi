@@ -7,23 +7,27 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-public class HubActivity extends AppCompatActivity {
+public class HubActivity extends AppCompatActivity implements IFirebase{
     Dialog b; Dialog d; Dialog l; InputValidation inputVal; FirebaseConnector fCon;
-    EditText emailInput; EditText passInput;
-    String email; String pass;
+    EditText emailInput; EditText passInput; EditText lNameInput; EditText lPassInput;
+    String email; String pass; User cUser; String lName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hub);
         fCon = new FirebaseConnector();
+        fCon.readUData(this);
+        fCon.readLobbies(this);
         // login page dialog
         d = new Dialog(this);
         d.setContentView(R.layout.dialog_login);
@@ -37,17 +41,13 @@ public class HubActivity extends AppCompatActivity {
         b.setContentView(R.layout.dialog_lobbies);
         l = new Dialog(this);
         l.setContentView(R.layout.dialog_lobbysetup);
-        // lobby recycler - next 4 lines are temp
-        ArrayList<GameState> lobbies = new ArrayList<>();
-        User dummy = new User("dummymail@co", "dummy user");
-        for(int i=1; i<15; i++)
-            lobbies.add(new GameState(dummy , "lobby "+i ));
-
+        // lobby input fields setup
+        lNameInput = l.findViewById(R.id.editTextLobbyName);
+        lPassInput = l.findViewById(R.id.editTextLobbyPass);
+        //
         RecyclerView recyclerView = b.findViewById(R.id.recyclerViewLobbies);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,1);
         recyclerView.setLayoutManager(layoutManager);
-        LobbyAdapter lobbyAdapter = new LobbyAdapter(lobbies);
-        recyclerView.setAdapter(lobbyAdapter);
     }
 
     @Override
@@ -98,7 +98,10 @@ public class HubActivity extends AppCompatActivity {
     }
 
     public void OpenGame(View view) {
-        startActivity(new Intent(this, GameActivity.class));
+        String lID = Integer.toString(new Random().nextInt(999999));
+        startActivity(new Intent(this, GameActivity.class).putExtra("key", lID));
+        GameState gs = new GameState("cUser.getuName()", "privatetest", lID);
+        fCon.createLobby(gs, this);
     }
 
     private void OpenExit() {
@@ -139,5 +142,25 @@ public class HubActivity extends AppCompatActivity {
         b.hide();
         l.show();
         l.setCancelable(true);
+    }
+
+    @Override
+    public void uDataCallback(User user) {
+        cUser = user;
+    }
+
+    @Override
+    public void lobbyDataCallback(ArrayList<GameState> lobbies) {
+        RecyclerView recyclerView = b.findViewById(R.id.recyclerViewLobbies);
+        LobbyAdapter lobbyAdapter = new LobbyAdapter(lobbies);
+        recyclerView.setAdapter(lobbyAdapter);
+    }
+
+    public void lobbyUpload(View view) {
+        lName = lNameInput.getText().toString();
+        String lID = Integer.toString(new Random().nextInt(999999));
+        GameState gs = new GameState(cUser.getuName() ,lName, lID);
+        gs.RoundSetup();
+        fCon.createLobby(gs, this);
     }
 }
