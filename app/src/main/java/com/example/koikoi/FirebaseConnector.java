@@ -1,16 +1,16 @@
 package com.example.koikoi;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,7 +18,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class FirebaseConnector {
     private static FirebaseAuth dAuth;
@@ -60,6 +59,9 @@ public class FirebaseConnector {
     public boolean isUser() {
         return getdAuth().getCurrentUser() != null;
     }
+    public void uploadImage(String s) {
+        getReference("users").child(getdAuth().getCurrentUser().getUid()).child("pfp").setValue(s);
+    }
     public void logout(Context context) {
         getdAuth().signOut();
         Toast.makeText(context, "logout successful", Toast.LENGTH_LONG).show();
@@ -79,16 +81,21 @@ public class FirebaseConnector {
         });
     }
     public void readUData(IFirebase fCallback) {
-        getReference("users").child(getdAuth().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = snapshot.getValue(User.class);
-                fCallback.uDataCallback(user);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
+        if (getdAuth().getCurrentUser() == null) {
+            User user = new User();
+            fCallback.uDataCallback(user);
+        }
+        else
+            getReference("users").child(getdAuth().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    User user = snapshot.getValue(User.class);
+                    fCallback.uDataCallback(user);
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
     }
 
     // game lobby functions
@@ -125,8 +132,8 @@ public class FirebaseConnector {
 
     public void roundStart(GameState GS) {
         getReference("games").child(GS.getlID()).child("deck").setValue(GS.getDeck());
-        getReference("games").child(GS.getlID()).child("pHand").setValue(GS.getpHand());
-        getReference("games").child(GS.getlID()).child("eHand").setValue(GS.geteHand());
+        getReference("games").child(GS.getlID()).child("pHand").setValue(GS.getPlayer1_hand());
+        getReference("games").child(GS.getlID()).child("eHand").setValue(GS.getPlayer2_hand());
         getReference("games").child(GS.getlID()).child("table").setValue(GS.getTable());
         getReference("games").child(GS.getlID()).child("round").setValue(GS.getRound());
     }

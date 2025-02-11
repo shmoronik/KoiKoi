@@ -1,21 +1,11 @@
 package com.example.koikoi;
 
-import android.content.Context;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
 
 public class GameActivity extends AppCompatActivity implements IGame {
 
@@ -78,13 +68,14 @@ public class GameActivity extends AppCompatActivity implements IGame {
     @Override
     public void GDataCallback(GameState GS) {
         vs = new VectorSwitch();
+        //boolean isPlayer1 = fcon.
         for (int j = 0; j < 3; j++) {
             for (int i = 0; i < 8; i++) {
                 switch (j) {
                     case 0:
-                        vs.customVector(pHCards[i], GS.getpHand().getImg(i));
+                        vs.customVector(pHCards[i], GS.getPlayer1_hand().getImg(i));
                     case 1:
-                        vs.customVector(eHCards[i], GS.geteHand().getImg(i));
+                        vs.customVector(eHCards[i], GS.getPlayer2_hand().getImg(i));
                     case 2:
                         if(i<4)
                             vs.customVector(tCards[0][i], GS.getTable().getImg(i));

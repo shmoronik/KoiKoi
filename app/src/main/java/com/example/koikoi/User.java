@@ -1,5 +1,7 @@
 package com.example.koikoi;
 
+import android.net.Uri;
+
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -8,8 +10,14 @@ public class User {
     private String email, uName, uId;
     private  int Gplayed, Gwins, Glost;
     private ArrayList<Friend> Friends;
+    private String pfp;
 
-    public User() {}
+    public User() {
+        uName = "guest";
+    }
+    public String getPfp() {return pfp;}
+
+    public void setPfp(String pfp) {this.pfp = pfp;}
 
     public String getuName() {
         return uName;

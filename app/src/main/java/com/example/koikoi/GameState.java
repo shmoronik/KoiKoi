@@ -1,7 +1,6 @@
 package com.example.koikoi;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class GameState {
     public String lName, lPass, lID;
@@ -9,7 +8,7 @@ public class GameState {
     public ArrayList<User> spectators;
     public int player1_points, player2_points;
     public Card.Season round;
-    public Deck deck, pHand, eHand, table;
+    public Deck deck, player1_hand, player2_hand, table;
 
     public GameState(){}
 
@@ -24,19 +23,19 @@ public class GameState {
 
     public void RoundSetup() {
         deck = new Deck();
-        pHand = new Deck(deck);
-        eHand = new Deck(deck);
+        player1_hand = new Deck(deck);
+        player2_hand = new Deck(deck);
         table = new Deck(deck);
         if (round == null) round = Card.Season.January;
         else round = round.next();
     }
 
-    public Deck getpHand() {
-        return pHand;
+    public Deck getPlayer1_hand() {
+        return player1_hand;
     }
 
-    public Deck geteHand() {
-        return eHand;
+    public Deck getPlayer2_hand() {
+        return player2_hand;
     }
 
     public Deck getTable() {

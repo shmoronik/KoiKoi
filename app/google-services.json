@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "358068169576",
+    "firebase_url": "https://koikoi-4d98d-default-rtdb.firebaseio.com",
+    "project_id": "koikoi-4d98d",
+    "storage_bucket": "koikoi-4d98d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358068169576:android:4990983422abef258844dd",
+        "android_client_info": {
+          "package_name": "com.example.koikoi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6dgxbOpjtN8E9hPrDIvWiV2Iv3cHqfl8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
