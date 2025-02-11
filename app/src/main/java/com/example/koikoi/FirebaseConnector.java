@@ -97,6 +97,19 @@ public class FirebaseConnector {
         Toast.makeText(context, "lobby created", Toast.LENGTH_SHORT).show();
     }
 
+    public void joinLobby(String uName, String id) {
+        getReference("games").child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(!snapshot.hasChild("player2"))
+                    getReference("games").child(id).child("player2").setValue(uName);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
     public void readGameState(IGame fCallback, String key) {
         getReference("games").child(key).addValueEventListener(new ValueEventListener() {
             @Override

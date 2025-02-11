@@ -31,6 +31,7 @@ public class LobbyAdapter extends RecyclerView.Adapter<LobbyAdapter.LobbiesViewH
         GameState currentGame = lobbies.get(position);
         holder.lobbyNameView.setText(currentGame.getlName());
         holder.lobbyDetailsView.setText(currentGame.getPlayerNames());
+        holder.valBtn.setText(currentGame.getlID());
         if (!currentGame.isFull())
             holder.button.setText("Join");
         else
@@ -43,14 +44,14 @@ public class LobbyAdapter extends RecyclerView.Adapter<LobbyAdapter.LobbiesViewH
     }
 
     public static class LobbiesViewHolder extends RecyclerView.ViewHolder {
-        public TextView lobbyNameView;
-        public TextView lobbyDetailsView;
-        public Button button;
+        public TextView lobbyNameView, lobbyDetailsView;
+        public Button button, valBtn;
         public LobbiesViewHolder(@NonNull View itemView) {
             super(itemView);
             lobbyNameView = itemView.findViewById(R.id.lobbyNameView);
             lobbyDetailsView = itemView.findViewById(R.id.lobbyDetailsView);
             button = itemView.findViewById(R.id.joinButton);
+            valBtn = itemView.findViewById(R.id.hiddenvalbtn);
         }
     }
 }

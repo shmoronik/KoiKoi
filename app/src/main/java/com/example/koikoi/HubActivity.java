@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -100,7 +101,7 @@ public class HubActivity extends AppCompatActivity implements IFirebase{
     public void OpenGame(View view) {
         String lID = Integer.toString(new Random().nextInt(999999));
         startActivity(new Intent(this, GameActivity.class).putExtra("key", lID));
-        GameState gs = new GameState("cUser.getuName()", "privatetest", lID);
+        GameState gs = new GameState(cUser.getuName(), "privatetest", lID);
         fCon.createLobby(gs, this);
     }
 
@@ -142,6 +143,11 @@ public class HubActivity extends AppCompatActivity implements IFirebase{
         b.hide();
         l.show();
         l.setCancelable(true);
+    }
+
+    public void join(View view) {
+        Button b = (Button) view;
+        fCon.joinLobby(cUser.getuName(), b.getText().toString());
     }
 
     @Override

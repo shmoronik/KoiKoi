@@ -27,6 +27,21 @@
         app:layout_constraintBottom_toBottomOf="@+id/lobbyDetailsView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/lobbyDetailsView"
+        app:layout_constraintTop_toTopOf="@+id/lobbyNameView"
+        android:clickable="false"/>
+
+    <Button
+        android:id="@+id/hiddenvalbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="92dp"
+        android:backgroundTint="@color/clear"
+        android:text=""
+        android:textColor="@color/clear"
+        android:onClick="join"
+        app:layout_constraintBottom_toBottomOf="@+id/lobbyDetailsView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lobbyDetailsView"
         app:layout_constraintTop_toTopOf="@+id/lobbyNameView" />
 
     <TextView
