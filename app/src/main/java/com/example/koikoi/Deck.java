@@ -22,6 +22,8 @@ public class Deck implements Serializable {
     public Card draw() {
         return cards.remove(0);
     }
+    public Card pull(int n){return cards.remove(n);}
+    public Card choose(int n){return cards.get(n);}
 
     public int getImg(int i) {
         return cards.get(i).getImg();

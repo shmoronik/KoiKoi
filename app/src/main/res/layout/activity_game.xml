@@ -263,7 +263,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:src="@drawable/card_front"/>
+            android:src="@drawable/card_back"/>
 
         <ImageView
             android:id="@+id/iV_eHCard2"
@@ -272,7 +272,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:src="@drawable/card_front" />
+            android:src="@drawable/card_back" />
 
         <ImageView
             android:id="@+id/iV_eHCard3"
@@ -281,7 +281,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:src="@drawable/card_front" />
+            android:src="@drawable/card_back" />
 
         <ImageView
             android:id="@+id/iV_eHCard4"
@@ -290,7 +290,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:src="@drawable/card_front" />
+            android:src="@drawable/card_back" />
 
         <ImageView
             android:id="@+id/iV_eHCard5"
@@ -299,7 +299,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:src="@drawable/card_front" />
+            android:src="@drawable/card_back" />
 
         <ImageView
             android:id="@+id/iV_eHCard6"
@@ -308,7 +308,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:src="@drawable/card_front" />
+            android:src="@drawable/card_back" />
 
         <ImageView
             android:id="@+id/iV_eHCard7"
@@ -317,7 +317,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:src="@drawable/card_front" />
+            android:src="@drawable/card_back" />
 
         <ImageView
             android:id="@+id/iV_eHCard8"
@@ -326,7 +326,7 @@
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:src="@drawable/card_front" />
+            android:src="@drawable/card_back" />
 
     </LinearLayout>
 

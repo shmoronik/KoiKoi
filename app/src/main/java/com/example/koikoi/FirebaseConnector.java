@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class FirebaseConnector {
@@ -93,8 +94,7 @@ public class FirebaseConnector {
                     fCallback.uDataCallback(user);
                 }
                 @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
+                public void onCancelled(@NonNull DatabaseError error) {}
             });
     }
 
@@ -104,12 +104,12 @@ public class FirebaseConnector {
         Toast.makeText(context, "lobby created", Toast.LENGTH_SHORT).show();
     }
 
-    public void joinLobby(String uName, String id) {
+    public void joinLobby(Friend p2, String id) {
         getReference("games").child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(!snapshot.hasChild("player2"))
-                    getReference("games").child(id).child("player2").setValue(uName);
+                    getReference("games").child(id).child("player2").setValue(p2);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

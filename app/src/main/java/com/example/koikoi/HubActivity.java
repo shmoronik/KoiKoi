@@ -60,13 +60,6 @@ public class HubActivity extends AppCompatActivity implements IFirebase{
         return true;
     }
 
-    /*@Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.action_login).setVisible(fCon.isUser());
-        menu.findItem(R.id.action_user).setVisible(!fCon.isUser());
-        return true;
-    }*/
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemID= item.getItemId();
@@ -81,28 +74,9 @@ public class HubActivity extends AppCompatActivity implements IFirebase{
         return super.onOptionsItemSelected(item);
     }
 
-    /*public void login(View view) {
-        // user input values setup
-        email = emailInput.getText().toString();
-        pass = passInput.getText().toString();
-        // user input value checks
-        if (!inputVal.isVUser(email, pass)) {
-            fCon.login(email, pass, this);
-        }
-        else
-            d.hide();
-    }*/
-
     public void Flist(View view) {
         b.show();
         b.setCancelable(true);
-    }
-
-    public void OpenGame(View view) {
-        String lID = Integer.toString(new Random().nextInt(999999));
-        startActivity(new Intent(this, GameActivity.class).putExtra("key", lID));
-        GameState gs = new GameState(cUser.getuName(), "privatetest", lID);
-        fCon.createLobby(gs, this);
     }
 
     private void OpenExit() {
@@ -147,7 +121,8 @@ public class HubActivity extends AppCompatActivity implements IFirebase{
 
     public void join(View view) {
         Button b = (Button) view;
-        fCon.joinLobby(cUser.getuName(), b.getText().toString());
+        Friend gameUser = new Friend(cUser);
+        fCon.joinLobby(gameUser, b.getText().toString());
     }
 
     @Override
@@ -165,8 +140,17 @@ public class HubActivity extends AppCompatActivity implements IFirebase{
     public void lobbyUpload(View view) {
         lName = lNameInput.getText().toString();
         String lID = Integer.toString(new Random().nextInt(999999));
-        GameState gs = new GameState(cUser.getuName() ,lName, lID);
+        Friend gameUser = new Friend(cUser);
+        GameState gs = new GameState(gameUser ,lName, lID);
         gs.RoundSetup();
+        fCon.createLobby(gs, this);
+    }
+
+    public void OpenGame(View view) {
+        String lID = Integer.toString(new Random().nextInt(999999));
+        startActivity(new Intent(this, GameActivity.class).putExtra("key", lID).putExtra("user", cUser.getuId()));
+        Friend gameUser = new Friend(cUser);
+        GameState gs = new GameState(gameUser, "privatetest", lID);
         fCon.createLobby(gs, this);
     }
 }

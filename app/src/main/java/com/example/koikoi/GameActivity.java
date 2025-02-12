@@ -12,10 +12,9 @@ public class GameActivity extends AppCompatActivity implements IGame {
     VectorSwitch vs;
     LinearLayout ph;
     float WeightSum;
-    GameState game;
     ImageView[] pHCards, eHCards;
     ImageView[][] tCards;
-    FirebaseConnector fCon; String key;
+    FirebaseConnector fCon; String key; String uid;
 
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
@@ -56,6 +55,7 @@ public class GameActivity extends AppCompatActivity implements IGame {
         tCards[1][4] = (findViewById(R.id.iV_table2_5));
         tCards[1][5] = (findViewById(R.id.iV_table2_6));
         key = getIntent().getStringExtra("key");
+        uid = getIntent().getStringExtra("user");
         fCon.readGameState(this, key);
     }
 
@@ -67,15 +67,26 @@ public class GameActivity extends AppCompatActivity implements IGame {
 
     @Override
     public void GDataCallback(GameState GS) {
+        int usermode = 0;
+        if (GS.isP1(uid))
+            usermode = 1;
+        else if (GS.isP2(uid))
+            usermode = 2;
         vs = new VectorSwitch();
-        //boolean isPlayer1 = fcon.
         for (int j = 0; j < 3; j++) {
             for (int i = 0; i < 8; i++) {
                 switch (j) {
                     case 0:
-                        vs.customVector(pHCards[i], GS.getPlayer1_hand().getImg(i));
+                        switch (usermode) {
+                            case 0:
+                            case 1:
+                                vs.customVector(pHCards[i], GS.getPlayer1_hand().getImg(i));
+                            case 2:
+                                vs.customVector(pHCards[i], GS.getPlayer2_hand().getImg(i));
+                        }
                     case 1:
-                        vs.customVector(eHCards[i], GS.getPlayer2_hand().getImg(i));
+                        if (usermode==0)
+                            vs.customVector(eHCards[i], GS.getPlayer1_hand().getImg(i));
                     case 2:
                         if(i<4)
                             vs.customVector(tCards[0][i], GS.getTable().getImg(i));

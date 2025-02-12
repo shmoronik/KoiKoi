@@ -13,16 +13,16 @@ public class User {
     private String pfp;
 
     public User() {
-        uName = "guest";
+        this.uName = "guest";
+        this.uId = "";
+        this.pfp = "";
     }
     public String getPfp() {return pfp;}
-
     public void setPfp(String pfp) {this.pfp = pfp;}
 
     public String getuName() {
         return uName;
     }
-
     public void setuName(String uName) {
         this.uName = uName;
     }
@@ -30,7 +30,6 @@ public class User {
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -38,7 +37,6 @@ public class User {
     public String getuId() {
         return uId;
     }
-
     public void setuId(String uId) {
         this.uId = uId;
     }
@@ -51,17 +49,9 @@ public class User {
         this.Glost = 0;
     }
 
-    public int getGplayed() {
-        return Gplayed;
-    }
-
-    public int getGwins() {
-        return Gwins;
-    }
-
-    public int getGlost() {
-        return Glost;
-    }
+    public int getGplayed() {return Gplayed;}
+    public int getGwins() {return Gwins;}
+    public int getGlost() {return Glost;}
 
     public void GplayedInc(Boolean isWin) {
         this.Gplayed += 1;
